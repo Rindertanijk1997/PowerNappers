@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
+
 //middleware för ladda menydata
 const loadMenu = (req, res, next) => {
     //sökväg till filen menu.json
@@ -17,6 +18,7 @@ const loadMenu = (req, res, next) => {
             req.menu = menuData.menu;
             next();
         } catch (parseError) {
+
             //hantera fel vid parsning av JSON-data
             return res.status(500).json({ error: 'Failed to parse menu data' });
         }
