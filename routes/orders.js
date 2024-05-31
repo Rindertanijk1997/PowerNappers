@@ -4,11 +4,11 @@ import Datastore from 'nedb';
 import errorHandler from '../middlewares/orderMiddleWare.js'; 
 
 const router = express.Router();
-const db = new Datastore({ filename: './db/cart.db', autoload: true });
+const dbCart = new Datastore({ filename: './db/cart.db', autoload: true });
 
 // Funktion för att lägga till produkt i varukorgen
 export function addToCart(product, callback) {
-    db.insert(product, callback);
+    dbCart.insert(product, callback);
 }
 
 router.post('/add-to-cart', (req, res, next) => {
@@ -22,7 +22,7 @@ router.post('/add-to-cart', (req, res, next) => {
 
 // Funktion för att hämta alla produkter i varukorgen
 export function getCart(callback) {
-    db.find({}, callback);
+    dbCart.find({}, callback);
 }
 
 router.get('/cart', (req, res, next) => {
