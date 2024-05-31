@@ -13,7 +13,7 @@ const validateLogin = (req, res, next) => {
             return res.status(500).json({ error: 'Internal server error while retrieving user data.' });
         }
 
-        if (!user) {
+        if (!user || user.password !== password) {
             return res.status(401).json({ error: 'Invalid credentials provided.' });
         }
 
