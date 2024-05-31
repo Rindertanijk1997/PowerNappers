@@ -30,7 +30,12 @@ router.get('/cart', (req, res, next) => {
         if (err) {
             return next(err);  // Skickar fel till errorHandler
         }
-        res.status(200).json(products);
+        
+        // Beräkna totalpriset för produkterna i varukorgen
+        const totalPrice = products.reduce((total, product) => total + Number(product.price), 0);
+
+        // Skicka tillbaka produkterna tillsammans med totalpriset
+        res.status(200).json({ products, totalPrice });
     });
 });
 
