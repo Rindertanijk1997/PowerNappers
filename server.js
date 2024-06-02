@@ -8,8 +8,9 @@ import authRoutes from './routes/auth.js';
 const app = express();
 const PORT = 8080;
 
-app.use('/about', aboutRouter);
 app.use(express.json());
+
+app.use('/about', aboutRouter);
 app.use('/orders', orderRoutes);
 app.use('/products', productsRoutes);
 app.use('/users', userRoutes);
