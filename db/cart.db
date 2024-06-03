@@ -6,3 +6,4 @@
 {"userId":"f4c78f84-5875-4a45-a17a-80de15206b76","items":[{"title":"Caffè Doppio","price":39},{"title":"Latte Macchiato","price":49},{"title":"Latte Macchiato","price":49}],"totalAmount":137,"status":"Processing","createdAt":{"$$date":1717226528395},"_id":"VBGdKQiRboWGnDRU"}
 {"id":1,"price":39,"_id":"j76wcMI3O8JZDLGF"}
 {"id":1,"title":"Bryggkaffe","price":39,"_id":"szi2CZkAdMLWQsbn"}
+{"id":1,"title":"Bryggkaffe","price":39,"_id":"uAasz321nPaDeKlb"}
