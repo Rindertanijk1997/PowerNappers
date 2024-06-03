@@ -9,7 +9,7 @@ const validateLogin = (req, res, next) => {
 
     db.findOne({ username }, (err, user) => {
         if (err) {
-            console.error('Database error during login:', err);
+            console.error('Databas fel vid inloggning:', err);
             return res.status(500).json({ error: 'Serverfel vid hämtning av användardata.' });
         }
 
