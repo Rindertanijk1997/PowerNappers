@@ -37,6 +37,7 @@ router.get('/cart', (req, res, next) => {
     });
 });
 
+// Function för att ta bort från varukorg    
 export function deleteFromCart(productId, callback) {
     dbCart.remove({ _id: productId }, {}, callback);
 }
