@@ -4,17 +4,17 @@ const validateLogin = (req, res, next) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-        return res.status(400).json({ error: 'Both username and password are required.' });
+        return res.status(400).json({ error: 'Både användarnamn och lösenord krävs.' });
     }
 
     db.findOne({ username }, (err, user) => {
         if (err) {
-            console.error('Database error during login:', err);
-            return res.status(500).json({ error: 'Internal server error while retrieving user data.' });
+            console.error('Databas fel vid inloggning:', err);
+            return res.status(500).json({ error: 'Serverfel vid hämtning av användardata.' });
         }
 
-        if (!user) {
-            return res.status(401).json({ error: 'Invalid credentials provided.' });
+        if (!user || user.password !== password) {
+            return res.status(401).json({ error: 'Ogiltiga användaruppgifter har angetts.' });
         }
 
         req.user = user;
