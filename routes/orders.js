@@ -2,21 +2,25 @@ import express from 'express';
 import Datastore from 'nedb';
 import validateProduct from '../middlewares/validateProduct.js';
 import errorHandler from '../middlewares/orderMiddleWare.js';
+import { insertMenu } from '../db/menu.js';
 
 const router = express.Router();
 const dbCart = new Datastore({ filename: './db/cart.db', autoload: true });
 
 // Funktion för att lägga till en produkt i varukorgen
 export function addToCart(product, callback) {
-    dbCart.insert(product, (err, newDoc) => {
-        if (err) {
-            console.error('Fel vid tillägg av produkt:', err); // Log error if product addition fails
-        } else {
-            console.log('Produkt tillagd i varukorgen:', newDoc); // Log the new product added to the cart
-        }
-        callback(err, newDoc);
-    });
+    dbCart.insert(product, callback);
 }
+
+router.post('/menu', (req, res, next) => {
+    const menu = req.body;  
+    insertMenu(menu, (err, newDoc) => {
+        if (err) {
+            return next(err);
+        }
+        res.status(201).json({ message: 'Meny tillagd i databasen', menu: newDoc });
+    });
+});
 
 router.post('/add-to-cart', validateProduct, (req, res, next) => {
     addToCart(req.body, (err, newDoc) => {
