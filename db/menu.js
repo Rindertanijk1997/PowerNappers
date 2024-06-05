@@ -1,6 +1,6 @@
 import Datastore from 'nedb';
 
-const dbMenu = new Datastore({ filename: './dbmenu.db', autoload: true });
+const dbMenu = new Datastore({ filename: './db/dbmenu.db', autoload: true });
 
 // Funktion för att infoga menyer i databasen
 export function insertMenu(callback) {
