@@ -78,16 +78,20 @@ router.delete('/cart/:id', (req, res, next) => {
     });
 });
 
-// Skapar en beställning
-router.post('/create-order', (req, res, next) => {
+
     const orderItems = req.body.items;
     const totalAmount = orderItems.reduce((total, item) => total + item.price, 0);
 
+    // Skapa ett Date-objekt och lägg till 15 minuter
+    const processingTime = new Date();
+    processingTime.setMinutes(processingTime.getMinutes() + 15);
+
+    // Skapa order-objektet med den uppdaterade statusen
     const order = {
         userId: req.body.userId || 'guest',
         items: orderItems,
         totalAmount: totalAmount,
-        status: 'Processing',
+        status: 'Levereras  ' + processingTime.toLocaleTimeString(), // Uppdaterad status
         createdAt: new Date()
     };
 
@@ -97,7 +101,7 @@ router.post('/create-order', (req, res, next) => {
         }
         res.status(201).json({ message: 'Order skapad', orderId: newDoc._id });
     });
-});
+
 
 // Användarorderhistorik
 router.get('/history/:userId', (req, res, next) => {
