@@ -2,7 +2,7 @@ import express from 'express';
 import Datastore from 'nedb';
 import validateProduct from '../middlewares/validateProduct.js'; 
 import errorHandler from '../middlewares/orderMiddleWare.js';
-
+import { insertMenu } from '../db/menu.js';
 
 const router = express.Router();
 const dbCart = new Datastore({ filename: './db/cart.db', autoload: true });
@@ -10,6 +10,16 @@ const dbCart = new Datastore({ filename: './db/cart.db', autoload: true });
 export function addToCart(product, callback) {
     dbCart.insert(product, callback);
 }
+
+router.post('/menu', (req, res, next) => {
+    const menu = req.body;  
+    insertMenu(menu, (err, newDoc) => {
+        if (err) {
+            return next(err);
+        }
+        res.status(201).json({ message: 'Meny tillagd i databasen', menu: newDoc });
+    });
+});
 
 router.post('/add-to-cart', validateProduct, (req, res, next) => { 
     addToCart(req.body, (err, newDoc) => {
