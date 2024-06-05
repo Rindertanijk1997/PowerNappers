@@ -78,32 +78,40 @@ router.delete('/cart/:id', (req, res, next) => {
     });
 });
 
-
-    const orderItems = req.body.items;
-    const totalAmount = orderItems.reduce((total, item) => total + item.price, 0);
-
-    // Skapa ett Date-objekt och lägg till 15 minuter
-    const processingTime = new Date();
-    processingTime.setMinutes(processingTime.getMinutes() + 15);
-
-    // Skapa order-objektet med den uppdaterade statusen
-    const order = {
-        userId: req.body.userId || 'guest',
-        items: orderItems,
-        totalAmount: totalAmount,
-        status: 'Levereras  ' + processingTime.toLocaleTimeString(), // Uppdaterad status
-        createdAt: new Date()
-    };
-
-    dbCart.insert(order, (err, newDoc) => {
-        if (err) {
-            return next(err);
+router.post('/orders', (req, res, next) => {
+    try {
+        const orderItems = req.body.items;
+        if (!orderItems || !Array.isArray(orderItems)) {
+            return res.status(400).json({ error: 'Invalid items array' });
         }
-        res.status(201).json({ message: 'Order skapad', orderId: newDoc._id });
-    });
+
+        const totalAmount = orderItems.reduce((total, item) => total + item.price, 0);
+
+       
+        const processingTime = new Date();
+        processingTime.setMinutes(processingTime.getMinutes() + 15);
+
+        
+        const order = {
+            userId: req.body.userId || 'guest',
+            items: orderItems,
+            totalAmount: totalAmount,
+            status: 'Levereras ' + processingTime.toLocaleTimeString(), 
+            createdAt: new Date()
+        };
+
+        dbCart.insert(order, (err, newDoc) => {
+            if (err) {
+                return next(err);
+            }
+            res.status(201).json({ message: 'Order skapad', orderId: newDoc._id });
+        });
+    } catch (error) {
+        next(error);
+    }
+});
 
 
-// Användarorderhistorik
 router.get('/history/:userId', (req, res, next) => {
     const userId = req.params.userId;
 
@@ -115,7 +123,7 @@ router.get('/history/:userId', (req, res, next) => {
     });
 });
 
-// Middleware för felhantering
+
 router.use(errorHandler);
 
 export default router;
