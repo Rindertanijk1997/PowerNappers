@@ -3,7 +3,6 @@
 {"userId":"f4c78f84-5875-4a45-a17a-80de15206b76","items":[{"title":"Caffè Doppio","price":39},{"title":"Cappuccino","price":49},{"title":"Latte Macchiato","price":49}],"totalAmount":137,"status":"Processing till 11:43:29","createdAt":{"$$date":1717406909684},"_id":"Bp8pCWoW4fTZpw8x"}
 {"id":1,"title":"Bryggkaffe","desc":"Bryggd på månadens bönor.","price":39,"quantity":2,"_id":"EtLO62gchtRlR4US"}
 {"userId":"f4c78f84-5875-4a45-a17a-80de15206b76","items":[{"title":"Cappuccino","price":49},{"title":"Cappuccino","price":49},{"title":"Latte Macchiato","price":49}],"totalAmount":147,"status":"Levereras: 11:51:15","createdAt":{"$$date":1717407375150},"_id":"FhTGz620VXTzKF3N"}
-{"id":1,"title":"bryggkaffe","price":39,"_id":"KZvDZ3PM26EiuRW1"}
 {"userId":"f4c78f84-5875-4a45-a17a-80de15206b76","items":[{"id":1,"title":"Caffè Doppio","price":39},{"id":2,"title":"Latte Macchiato","price":49}],"totalAmount":88,"status":"Processing","createdAt":{"$$date":1717184571869},"_id":"PgH5vMrUMYigBhDg"}
 {"id":2,"title":"Caffè Doppio","price":49,"_id":"RkVMSvhOtPxuyHje"}
 {"id":1,"title":"Bryggkaffe","price":39,"_id":"UhtURiVuoIIGs0cx"}
